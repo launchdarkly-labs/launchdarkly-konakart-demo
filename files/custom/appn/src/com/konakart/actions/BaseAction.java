@@ -277,10 +277,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     /** KKAppEng */
     private KKAppEng jspEng;
 
-// LaunchDarkly - Start
-    protected Random ldRandom = new Random();
-// LaunchDarkly - End
-
     /**
      * Sets the variable kkAppEng to the KKAppEng instance saved in the session. If
      * cannot be found, then it is instantiated and attached.

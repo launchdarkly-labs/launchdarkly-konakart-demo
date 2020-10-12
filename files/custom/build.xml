@@ -547,6 +547,12 @@
 		<pathelement location="${libs.dir}/../classes" />
 		<path refid="compile.path.common" />
 		<path refid="kklibs.path" />
+		<!-- LaunchDarkly -->
+		<fileset dir="./lib">
+			<include name="launchdarkly-java-server-sdk-5.0.2.jar" />
+			<include name="slf4j-api-1.7.21.jar" />
+		</fileset>
+		<!-- /LaunchDarkly -->
 	</path>
 
 	<path id="custom.admin.compile.path">
