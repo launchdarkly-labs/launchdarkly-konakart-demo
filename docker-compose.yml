@@ -6,6 +6,22 @@ services:
         image: launchdarkly/konakart-demo:latest
         ports:
             - "8780:8780"
-        environment:
-            LD_DELAY_FLAG_KEY: <DELAY_FLAG_KEY>
-            LD_ENV_SERVER_KEY: <ENV_SERVER_KEY>
+        env_file:
+            - ./ld-konakart/vars.env
+    flag-flipper:
+        depends_on: 
+            - ld-konakart
+        build: 
+            context: ./flag-flipper
+        command: /usr/local/flag-flipper.sh
+        volumes:
+            - ./flag-flipper/files/usr/local/flag-flipper.sh:/usr/local/flag-flipper.sh:ro
+        env_file:
+            - ./flag-flipper/vars.env
+    traffic-generator:
+        depends_on: 
+            - ld-konakart
+        image: alpine:latest
+        command: /usr/local/traffic-generator.sh
+        volumes:
+            - ./traffic-generator/files/usr/local/traffic-generator.sh:/usr/local/traffic-generator.sh

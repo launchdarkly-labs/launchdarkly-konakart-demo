@@ -11,4 +11,3 @@ COPY ./files/custom/lib/slf4j-api-1.7.21.jar lib/slf4j-api-1.7.21.jar
 
 RUN ./bin/kkant -f ./build.xml build
 RUN ./bin/kkant -f ./build.xml copy_jars
-#ENTRYPOINT ["/usr/local/konakart/bin/startkonakart.sh"]
