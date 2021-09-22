@@ -1,11 +1,26 @@
 version: "3.8"
 services:
+    datadog-agent:
+        image: gcr.io/datadoghq/agent:7
+        links:
+            - ld-konakart
+        ports:
+            - "8126:8126"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /proc/:/host/proc/:ro
+            - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+        env_file:
+            - ./datadog-agent/vars.env
     ld-konakart:
         build: 
             context: ./ld-konakart
         image: launchdarkly/konakart-demo:latest
         ports:
             - "8780:8780"
+        volumes:
+            - ./ld-konakart/files/dd-java-agent.jar:/dd-java-agent.jar:ro
+            - ./ld-konakart/files/bin/catalina.sh:/usr/local/konakart/bin/catalina.sh:ro
         env_file:
             - ./ld-konakart/vars.env
     flag-flipper:
